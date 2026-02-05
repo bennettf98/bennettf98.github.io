@@ -1,4 +1,4 @@
-baseURL = 'https://coruscating-conkies-9af9d6.netlify.app/'
+baseURL = 'bennettf.github.io'
 languageCode = 'en-us'
 title = 'Learn about Web Accessibility'
 theme = 'ananke'
