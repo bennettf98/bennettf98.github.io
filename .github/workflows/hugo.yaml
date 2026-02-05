@@ -1,5 +1,47 @@
-- name: Setup Hugo
-  uses: peaceiris/actions-hugo@v4
-  with:
-    hugo-version: '0.124.1'
-    extended: true
+name: Build and Deploy Hugo Site
+on:
+  push:
+    branches:
+      - main # or whatever your default branch is
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        # Use actions/checkout@v4 to fetch your repository's code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch all history for Hugo Modules and potential deployment actions
+
+      - name: Setup Hugo Extended
+        # Use peaceiris/actions-hugo@v3 to install the extended version
+        uses: peaceiris/actions-hugo@v3.0.0
+        with:
+          hugo-version: 'latest' # You can specify a version, e.g., '0.127.0'
+          extended: true
+
+      - name: Build
+        # Run the Hugo build command
+        run: hugo --minify --cleanDestinationDir
+
+      - name: Upload artifact
+        # Use actions/upload-pages-artifact@v4 to upload the built site for deployment
+        uses: actions/upload-pages-artifact@v3.0.0
+        with:
+          path: './public'
+
+  deploy:
+    # Add a deployment job if deploying to GitHub Pages
+    needs: build
+    permissions:
+      pages: write      # Required to deploy to GitHub Pages
+      id-token: write   # Required for OpenID Connect (OIDC) authentication
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        # Use actions/deploy-pages@v4 to publish the artifact
+        uses: actions/deploy-pages@v3.0.0
