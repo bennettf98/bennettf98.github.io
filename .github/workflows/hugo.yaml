@@ -1,34 +1,5 @@
-name: Build and Deploy Hugo
-
-on:
-  push:
-    branches:
-      - main # or master
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write # Needed for the deploy step to write to the repository
-
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 # Fetch all history for accurate commit info
-
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2.7.0 # Use a specific version for stability
-        with:
-          hugo-version: 'latest' # You can specify a version like '0.123.0'
-          extended: true # THIS IS THE KEY: ensures the extended version is used
-
-      - name: Build site
-        run: hugo --minify --cleanDestinationDir
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public # Hugo's default output directory
-          publish_branch: gh-pages # Branch where the static site will be pushed
+- name: Setup Hugo
+  uses: peaceiris/actions-hugo@v4
+  with:
+    hugo-version: '0.124.1'
+    extended: true
