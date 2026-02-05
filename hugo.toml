@@ -7,6 +7,9 @@ theme = 'ananke'
 date_format = 'January 2, 2006'
 
 
+[params]
+custom_css = ["ananke/css/custom.css"]
+
 
 
 [menu]
