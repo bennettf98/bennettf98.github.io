@@ -11,3 +11,16 @@
 .box-simple {
   min-height: 230px;
 }
+.feedback .box-image-text,
+.feedback .box-simple {
+  min-height: auto;
+}
+
+.feedback .box-image-text .image {
+  min-height: auto;
+  max-height: none;
+}
+
+.feedback .box-image-text .image img {
+  max-height: none;
+}
