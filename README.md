@@ -22,7 +22,7 @@ This project simply exists as a website accessible to anyone on the internet, no
 
 Created by Bennett Franzen
 
-More of my work here: [https://github.com/bennettf98](url)
+More of my work here: https://github.com/bennettf98
 
 ## License
 
